@@ -1,4 +1,4 @@
-package com.example.zweather.features.domain
+package com.example.zweather.app.domain
 
 interface WeatherRepository {
 

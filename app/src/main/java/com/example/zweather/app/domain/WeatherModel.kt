@@ -1,11 +1,11 @@
-package com.example.zweather.features.domain
+package com.example.zweather.app.domain
 
-import com.example.zweather.features.data.Current
+import com.example.zweather.app.data.Current
 
 data class WeatherData(
     val location: Location?,
     val current: Current?,
-    val forecast: List<com.example.zweather.features.data.Forecastday>?,
+    val forecast: List<com.example.zweather.app.data.Forecastday>?,
 )
 
 data class Location(

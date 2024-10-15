@@ -1,7 +1,7 @@
-package com.example.zweather.features.data
+package com.example.zweather.app.data
 
-import com.example.zweather.features.domain.Location
-import com.example.zweather.features.domain.WeatherData
+import com.example.zweather.app.domain.Location
+import com.example.zweather.app.domain.WeatherData
 
 fun WeatherResponse.toDomain(): WeatherData {
     return WeatherData(

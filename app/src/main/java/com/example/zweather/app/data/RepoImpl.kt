@@ -1,8 +1,8 @@
-package com.example.zweather.features.data
+package com.example.zweather.app.data
 
+import com.example.zweather.app.domain.WeatherData
+import com.example.zweather.app.domain.WeatherRepository
 import com.example.zweather.core.apiKey
-import com.example.zweather.features.domain.WeatherData
-import com.example.zweather.features.domain.WeatherRepository
 import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(

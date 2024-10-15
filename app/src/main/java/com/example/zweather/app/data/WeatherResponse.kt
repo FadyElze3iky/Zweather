@@ -1,4 +1,4 @@
-package com.example.zweather.features.data
+package com.example.zweather.app.data
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty

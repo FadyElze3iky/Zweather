@@ -1,8 +1,8 @@
 package com.example.zweather
 
-import com.example.zweather.features.data.WeatherApiService
-import com.example.zweather.features.data.WeatherRepositoryImpl
-import com.example.zweather.features.domain.WeatherRepository
+import com.example.zweather.app.data.WeatherApiService
+import com.example.zweather.app.data.WeatherRepositoryImpl
+import com.example.zweather.app.domain.WeatherRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

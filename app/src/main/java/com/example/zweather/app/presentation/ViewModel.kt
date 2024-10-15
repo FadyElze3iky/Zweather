@@ -1,9 +1,9 @@
-package com.example.zweather.features.presentation
+package com.example.zweather.app.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.zweather.features.domain.GetWeatherUseCase
-import com.example.zweather.features.domain.WeatherData
+import com.example.zweather.app.domain.GetWeatherUseCase
+import com.example.zweather.app.domain.WeatherData
 import dagger.hilt.android.lifecycle.HiltViewModel
 
 import kotlinx.coroutines.flow.MutableStateFlow
