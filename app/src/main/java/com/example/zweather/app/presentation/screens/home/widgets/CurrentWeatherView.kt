@@ -8,10 +8,15 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.zweather.app.domain.WeatherData
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CurrentWeatherView(sheetState: BottomSheetScaffoldState, modifier: Modifier) {
+fun CurrentWeatherView(
+    weatherData: WeatherData?,
+    sheetState: BottomSheetScaffoldState,
+    modifier: Modifier,
+) {
     Column(
         modifier = modifier,
 
@@ -21,12 +26,12 @@ fun CurrentWeatherView(sheetState: BottomSheetScaffoldState, modifier: Modifier)
 
         AnimatedVisibility(visible = sheetState.bottomSheetState.currentValue.toString() == "PartiallyExpanded") {
 
-            CurrentWeatherWidget()
+            CurrentWeatherWidget(weatherData)
         }
 
 
         AnimatedVisibility(visible = sheetState.bottomSheetState.currentValue.toString() != "PartiallyExpanded") {
-            CurrentWeatherWidgetExpanded()
+            CurrentWeatherWidgetExpanded(weatherData)
 
         }
 

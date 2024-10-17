@@ -16,9 +16,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.zweather.app.domain.WeatherData
 
 @Composable
-fun CurrentWeatherWidgetExpanded() {
+fun CurrentWeatherWidgetExpanded(weatherData: WeatherData?) {
+
+    val cityName = weatherData?.location?.name ?: "waiting.."
+    val currentDegree = weatherData?.current?.tempC ?: ""
+    val condition = weatherData?.current?.condition?.text ?: ""
+
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -28,17 +34,17 @@ fun CurrentWeatherWidgetExpanded() {
     ) {
 
         Spacer(modifier = Modifier.height(30.dp))
-        Text(text = "Cairo", fontSize = 40.sp, color = Color.White)
+        Text(text = cityName, fontSize = 40.sp, color = Color.White)
 
         Row {
             Text(
-                text = "19°",
+                text = "$currentDegree°",
                 fontSize = 20.sp,
                 color = Color.LightGray,
                 fontWeight = FontWeight.Light
             )
             Text(
-                text = " | Mostly Clear", fontSize = 20.sp,
+                text = " | $condition", fontSize = 20.sp,
                 color = Color.LightGray,
                 fontWeight = FontWeight.Light
             )

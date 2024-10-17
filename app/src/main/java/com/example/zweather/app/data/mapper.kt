@@ -1,5 +1,6 @@
 package com.example.zweather.app.data
 
+import com.example.zweather.app.domain.Forecast
 import com.example.zweather.app.domain.Location
 import com.example.zweather.app.domain.WeatherData
 
@@ -64,89 +65,103 @@ fun WeatherResponse.toDomain(): WeatherData {
                 )
             )
         },
-        forecast = this.forecast?.forecastday?.map { forecastDay ->
-            Forecastday(
-                date = forecastDay.date,
-                dateEpoch = forecastDay.dateEpoch,
-                day = Day(
-                    maxtempC = forecastDay.day.maxtempC,
-                    maxtempF = forecastDay.day.maxtempF,
-                    mintempC = forecastDay.day.mintempC,
-                    mintempF = forecastDay.day.mintempF,
-                    avgtempC = forecastDay.day.avgtempC,
-                    avgtempF = forecastDay.day.avgtempF,
-                    maxwindMph = forecastDay.day.maxwindMph,
-                    maxwindKph = forecastDay.day.maxwindKph,
-                    totalprecipMm = forecastDay.day.totalprecipMm,
-                    totalprecipIn = forecastDay.day.totalprecipIn,
-                    totalsnowCm = forecastDay.day.totalsnowCm,
-                    avgvisKm = forecastDay.day.avgvisKm,
-                    avgvisMiles = forecastDay.day.avgvisMiles,
-                    avghumidity = forecastDay.day.avghumidity,
-                    dailyWillItRain = forecastDay.day.dailyWillItRain,
-                    dailyChanceOfRain = forecastDay.day.dailyChanceOfRain,
-                    dailyWillItSnow = forecastDay.day.dailyWillItSnow,
-                    dailyChanceOfSnow = forecastDay.day.dailyChanceOfSnow,
-                    condition = Condition2(
-                        text = forecastDay.day.condition?.text,
-                        icon = forecastDay.day.condition?.icon,
-                        code = forecastDay.day.condition?.code
-                    ),
-                    uv = forecastDay.day.uv
-                ),
-                astro = Astro(
-                    sunrise = forecastDay.astro.sunrise,
-                    sunset = forecastDay.astro.sunset,
-                    moonrise = forecastDay.astro.moonrise,
-                    moonset = forecastDay.astro.moonset,
-                    moonPhase = forecastDay.astro.moonPhase,
-                    moonIllumination = forecastDay.astro.moonIllumination,
-                    isMoonUp = forecastDay.astro.isMoonUp,
-                    isSunUp = forecastDay.astro.isSunUp
-                ),
-                hour = forecastDay.hour.map { hour ->
-                    Hour(
-                        timeEpoch = hour.timeEpoch,
-                        time = hour.time,
-                        tempC = hour.tempC,
-                        tempF = hour.tempF,
-                        isDay = hour.isDay,
-                        condition = Condition3(
-                            text = hour.condition?.text,
-                            icon = hour.condition?.icon,
-                            code = hour.condition?.code
-                        ),
-                        windMph = hour.windMph,
-                        windKph = hour.windKph,
-                        windDegree = hour.windDegree,
-                        windDir = hour.windDir,
-                        pressureMb = hour.pressureMb,
-                        pressureIn = hour.pressureIn,
-                        precipMm = hour.precipMm,
-                        precipIn = hour.precipIn,
-                        snowCm = hour.snowCm,
-                        humidity = hour.humidity,
-                        cloud = hour.cloud,
-                        feelslikeC = hour.feelslikeC,
-                        feelslikeF = hour.feelslikeF,
-                        windchillC = hour.windchillC,
-                        windchillF = hour.windchillF,
-                        heatindexC = hour.heatindexC,
-                        heatindexF = hour.heatindexF,
-                        dewpointC = hour.dewpointC,
-                        dewpointF = hour.dewpointF,
-                        willItRain = hour.willItRain,
-                        chanceOfRain = hour.chanceOfRain,
-                        willItSnow = hour.willItSnow,
-                        chanceOfSnow = hour.chanceOfSnow,
-                        visKm = hour.visKm,
-                        visMiles = hour.visMiles,
-                        gustMph = hour.gustMph,
-                        gustKph = hour.gustKph,
-                        uv = hour.uv
+        forecast = this.forecast?.let { forecast ->
+            Forecast(
+                forecastday = forecast.forecastday.map { forecastday ->
+                    Forecastday(
+                        date = forecastday.date,
+                        dateEpoch = forecastday.dateEpoch,
+                        day = forecastday.day.let { day ->
+                            Day(
+                                maxtempC = day.maxtempC,
+                                maxtempF = day.maxtempF,
+                                mintempC = day.mintempC,
+                                mintempF = day.mintempF,
+                                avgtempC = day.avgtempC,
+                                avgtempF = day.avgtempF,
+                                maxwindMph = day.maxwindMph,
+                                maxwindKph = day.maxwindKph,
+                                totalprecipMm = day.totalprecipMm,
+                                totalprecipIn = day.totalprecipIn,
+                                totalsnowCm = day.totalsnowCm,
+                                avgvisKm = day.avgvisKm,
+                                avgvisMiles = day.avgvisMiles,
+                                avghumidity = day.avghumidity,
+                                dailyWillItRain = day.dailyWillItRain,
+                                dailyChanceOfRain = day.dailyChanceOfRain,
+                                dailyWillItSnow = day.dailyWillItSnow,
+                                dailyChanceOfSnow = day.dailyChanceOfSnow,
+                                condition = day.condition?.let { condition2 ->
+                                    Condition2(
+                                        text = condition2.text,
+                                        icon = condition2.icon,
+                                        code = condition2.code
+                                    )
+                                },
+                                uv = day.uv
+                            )
+                        },
+                        astro = forecastday.astro.let { astro ->
+                            Astro(
+                                sunrise = astro.sunrise,
+                                sunset = astro.sunset,
+                                moonrise = astro.moonrise,
+                                moonset = astro.moonset,
+                                moonPhase = astro.moonPhase,
+                                moonIllumination = astro.moonIllumination,
+                                isMoonUp = astro.isMoonUp,
+                                isSunUp = astro.isSunUp
+                            )
+                        },
+                        hour = forecastday.hour.map { hour ->
+                            Hour(
+                                timeEpoch = hour.timeEpoch,
+                                time = hour.time,
+                                tempC = hour.tempC,
+                                tempF = hour.tempF,
+                                isDay = hour.isDay,
+                                condition = hour.condition?.let { condition3 ->
+                                    Condition3(
+                                        text = condition3.text,
+                                        icon = condition3.icon,
+                                        code = condition3.code
+                                    )
+                                },
+                                windMph = hour.windMph,
+                                windKph = hour.windKph,
+                                windDegree = hour.windDegree,
+                                windDir = hour.windDir,
+                                pressureMb = hour.pressureMb,
+                                pressureIn = hour.pressureIn,
+                                precipMm = hour.precipMm,
+                                precipIn = hour.precipIn,
+                                snowCm = hour.snowCm,
+                                humidity = hour.humidity,
+                                cloud = hour.cloud,
+                                feelslikeC = hour.feelslikeC,
+                                feelslikeF = hour.feelslikeF,
+                                windchillC = hour.windchillC,
+                                windchillF = hour.windchillF,
+                                heatindexC = hour.heatindexC,
+                                heatindexF = hour.heatindexF,
+                                dewpointC = hour.dewpointC,
+                                dewpointF = hour.dewpointF,
+                                willItRain = hour.willItRain,
+                                chanceOfRain = hour.chanceOfRain,
+                                willItSnow = hour.willItSnow,
+                                chanceOfSnow = hour.chanceOfSnow,
+                                visKm = hour.visKm,
+                                visMiles = hour.visMiles,
+                                gustMph = hour.gustMph,
+                                gustKph = hour.gustKph,
+                                uv = hour.uv
+                            )
+                        }
                     )
                 }
             )
         }
     )
 }
+
+

@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     kotlin("kapt")
-    id ("dagger.hilt.android.plugin") // Apply Hilt plugin
+    id("dagger.hilt.android.plugin") // Apply Hilt plugin
 
 }
 
@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -75,11 +76,17 @@ dependencies {
     kapt(libs.hilt.android.compiler)
 
     // Optional for view models
-    implementation (libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
 
-    implementation (libs.retrofit)
+    implementation(libs.retrofit)
     implementation(libs.converter.jackson)// Jackson converter for JSON
-    implementation (libs.okhttp) // For networking
+    implementation(libs.okhttp) // For networking
+
+    implementation(libs.accompanist.permissions)
+    implementation(libs.play.services.location)
+
+    implementation(libs.androidx.navigation.compose)
+
 }
 
 

@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.zweather.app.presentation.Navigator
 import com.example.zweather.app.presentation.screens.home.HomeScreen
 import com.example.zweather.ui.theme.ZweatherTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,7 +19,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ZweatherTheme {
-                HomeScreen()
+                Navigator()
 
             }
         }

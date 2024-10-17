@@ -20,14 +20,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.zweather.R
-import com.example.zweather.app.presentation.WeatherViewModel
+import com.example.zweather.app.domain.WeatherData
 
 @SuppressLint("InvalidColorHexValue")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeBody(viewModel: WeatherViewModel = hiltViewModel(), sheetState: BottomSheetScaffoldState) {
+fun HomeBody(weatherData: WeatherData?, sheetState: BottomSheetScaffoldState) {
 
     Box(modifier = Modifier.fillMaxSize()) {
 
@@ -41,7 +40,7 @@ fun HomeBody(viewModel: WeatherViewModel = hiltViewModel(), sheetState: BottomSh
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height((LocalConfiguration.current.screenHeightDp * .55).dp)
+                .height((LocalConfiguration.current.screenHeightDp * .6).dp)
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
@@ -62,13 +61,17 @@ fun HomeBody(viewModel: WeatherViewModel = hiltViewModel(), sheetState: BottomSh
         Image(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = (LocalConfiguration.current.screenHeightDp * .2).dp),
+                .padding(bottom = (LocalConfiguration.current.screenHeightDp * .23).dp),
             painter = painterResource(id = R.drawable.house),
             contentDescription = "house",
             contentScale = ContentScale.FillWidth
         )
 
-        CurrentWeatherView(sheetState, modifier = Modifier.align(Alignment.TopCenter))
+        CurrentWeatherView(
+            weatherData = weatherData,
+            sheetState = sheetState,
+            modifier = Modifier.align(Alignment.TopCenter)
+        )
 
     }
 

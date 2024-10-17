@@ -1,4 +1,4 @@
-package com.example.zweather.app.presentation.screens.home.widgets
+package com.example.zweather.app.presentation.screens.home.widgets.bottomsheet
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

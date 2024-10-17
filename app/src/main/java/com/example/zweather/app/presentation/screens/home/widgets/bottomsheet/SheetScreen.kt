@@ -1,4 +1,4 @@
-package com.example.zweather.app.presentation.screens.home.widgets
+package com.example.zweather.app.presentation.screens.home.widgets.bottomsheet
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
@@ -12,10 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.zweather.app.domain.WeatherData
+import com.example.zweather.app.presentation.screens.home.widgets.HomeBody
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun SheetScreen(
+    weatherData: WeatherData?,
     sheetHeight: Float,
     sheetState: BottomSheetScaffoldState,
 ) {
@@ -43,7 +46,7 @@ fun SheetScreen(
     )
     {
 
-        HomeBody(sheetState = sheetState)
+        HomeBody(weatherData = weatherData, sheetState = sheetState)
 
     }
 }

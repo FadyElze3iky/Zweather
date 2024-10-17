@@ -10,5 +10,6 @@ interface WeatherApiService {
         @Query("key") apiKey: String,
         @Query("q") location: String,
         @Query("days") days: Int,
+        @Query("aqi") aqi: String = "yes",
     ): WeatherResponse
 }
