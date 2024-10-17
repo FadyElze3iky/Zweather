@@ -68,7 +68,7 @@ fun CustomTapRow(
             },
             text = {
                 Text(
-                    text = "Weekly Forecast",
+                    text = "3Days Forecast",
                     style = MaterialTheme.typography.bodyLarge
                 )
             }

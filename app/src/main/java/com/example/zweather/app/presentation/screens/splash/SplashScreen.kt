@@ -28,15 +28,12 @@ fun SplashScreen(onSplashCompleted: () -> Unit, viewModel: WeatherViewModel = hi
         val fineLocationGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false
         val coarseLocationGranted = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false
 
-        if (fineLocationGranted || coarseLocationGranted) {
+        if (!fineLocationGranted || !coarseLocationGranted) {
             // Permissions granted, proceed to fetch location and weather
-            viewModel.initializeLocationClient(context)
+            Toast.makeText(context, "Location permission is denied", Toast.LENGTH_SHORT).show()
 
         }
-        else {
-            // Permissions denied, show a toast
-            Toast.makeText(context, "Location permission is denied", Toast.LENGTH_SHORT).show()
-        }
+        
     }
 
 

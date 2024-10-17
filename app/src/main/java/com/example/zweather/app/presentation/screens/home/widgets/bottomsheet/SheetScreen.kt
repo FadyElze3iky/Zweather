@@ -28,7 +28,7 @@ fun SheetScreen(
             .verticalScroll(rememberScrollState()),
         sheetContent = {
 
-            SheetContent()
+            SheetContent(weatherData, sheetState)
 
         },
 

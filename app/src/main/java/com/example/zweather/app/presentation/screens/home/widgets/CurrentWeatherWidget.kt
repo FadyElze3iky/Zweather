@@ -19,7 +19,7 @@ import com.example.zweather.app.domain.WeatherData
 fun CurrentWeatherWidget(weatherData: WeatherData?) {
 
     val cityName = weatherData?.location?.name ?: "waiting.."
-    val currentDegree = weatherData?.current?.tempC ?: ""
+    val currentDegree = weatherData?.current?.tempC?.toInt() ?: ""
     val condition = weatherData?.current?.condition?.text ?: ""
     val maxtc = weatherData?.forecast?.forecastday?.get(0)?.day?.maxtempC ?: ".."
     val mintc = weatherData?.forecast?.forecastday?.get(0)?.day?.mintempC ?: ".."

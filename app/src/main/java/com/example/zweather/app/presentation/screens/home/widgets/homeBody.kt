@@ -37,6 +37,21 @@ fun HomeBody(weatherData: WeatherData?, sheetState: BottomSheetScaffoldState) {
             contentScale = ContentScale.Fit
         )
 
+        if (weatherData != null) {
+            if (weatherData.current?.isDay == 0) {
+                Image(
+                    painter = painterResource(id = R.drawable.backimage),
+                    contentDescription = "background image",
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Fit
+                )
+
+            }
+        }
+
+
+
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -58,6 +73,7 @@ fun HomeBody(weatherData: WeatherData?, sheetState: BottomSheetScaffoldState) {
                     spotColor = Color(0xff302857),
                 )
         )
+
         Image(
             modifier = Modifier
                 .align(Alignment.BottomCenter)

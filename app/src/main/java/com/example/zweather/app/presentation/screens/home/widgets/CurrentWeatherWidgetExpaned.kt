@@ -22,7 +22,7 @@ import com.example.zweather.app.domain.WeatherData
 fun CurrentWeatherWidgetExpanded(weatherData: WeatherData?) {
 
     val cityName = weatherData?.location?.name ?: "waiting.."
-    val currentDegree = weatherData?.current?.tempC ?: ""
+    val currentDegree = weatherData?.current?.tempC?.toInt() ?: ""
     val condition = weatherData?.current?.condition?.text ?: ""
 
 

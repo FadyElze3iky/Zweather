@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,15 +21,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import com.example.zweather.app.data.Hour
 
 @Composable
 fun HourItem(
+
+    hourData: Hour?,
     it: Int,
     hour: Int,
     to12: Int,
     checkDay: String,
-    degree: String,
-) {
+
+    ) {
+
     Box(
         modifier = Modifier
             .padding(
@@ -46,8 +53,8 @@ fun HourItem(
             )
             .clip(shape = RoundedCornerShape(50.dp))
 
-            .height(150.dp)
-            .width(70.dp)
+            .height(130.dp)
+            .width(60.dp)
             .background(
                 color = if (it != hour) Color(0x8136335d) else Color(0x457E70AF)
 
@@ -62,14 +69,27 @@ fun HourItem(
             Text(
                 text = if (it != hour) "$to12 $checkDay" else "Now",
                 color = Color.White,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleSmall
             )
 
-            Text(
-                text = degree,
-                color = Color.White,
-                style = MaterialTheme.typography.titleMedium
-            )
+
+            if (hourData != null) {
+                println(hourData.condition?.icon)
+                val iconUrl = "https:${hourData.condition?.icon}"
+                AsyncImage(
+                    model = iconUrl,
+                    contentDescription = "Condition icon",
+                    modifier = Modifier.size(40.dp)
+                )
+                Text(
+                    text = "${hourData.tempC.toString()}°",
+                    color = Color.White,
+                    style = MaterialTheme.typography.titleSmall
+                )
+            }
+            else {
+                CircularProgressIndicator()
+            }
 
         }
     }

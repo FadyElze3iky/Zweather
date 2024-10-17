@@ -10,10 +10,14 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
+import com.example.zweather.app.domain.WeatherData
 
 @Composable
 @OptIn(ExperimentalFoundationApi::class)
-fun ColumnScope.CustomPager(pagerState: PagerState) {
+fun ColumnScope.CustomPager(pagerState: PagerState, weatherData: WeatherData?) {
+
+    val hourlyForecast = weatherData?.forecast?.forecastday?.get(0)
+    val weaklyForecast = weatherData?.forecast?.forecastday
     HorizontalPager(
         state = pagerState,
         userScrollEnabled = false
@@ -23,14 +27,14 @@ fun ColumnScope.CustomPager(pagerState: PagerState) {
             enter = fadeIn() + slideInVertically(),
             exit = fadeOut() + slideOutVertically()
         ) {
-            HourForecastView()
+            HourForecastView(hourlyForecast)
         }
         AnimatedVisibility(
             visible = page == 1,
             enter = fadeIn() + slideInVertically(),
             exit = fadeOut() + slideOutVertically()
         ) {
-            WeekForecastView()
+            WeekForecastView(weaklyForecast)
         }
 
     }

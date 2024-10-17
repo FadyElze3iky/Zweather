@@ -46,7 +46,10 @@ class WeatherViewModel @Inject constructor(
                 null  // No specific cancellation token is required here
             ).addOnSuccessListener { location: Location? ->
                 if (location != null) {
-                    fetchWeather("${location.latitude},${location.longitude}")
+                    
+                    val currentLocation = "${location.latitude},${location.longitude}"
+
+                    fetchWeather(currentLocation, context)
                 }
                 else {
                     Toast.makeText(context, "Location not available", Toast.LENGTH_SHORT).show()
@@ -54,10 +57,10 @@ class WeatherViewModel @Inject constructor(
             }.addOnFailureListener {
                 Toast.makeText(context, "Failed to get current location", Toast.LENGTH_SHORT).show()
             }
-        } 
+        }
     }
 
-    fun fetchWeather(location: String) {
+    fun fetchWeather(location: String, context: Context) {
         viewModelScope.launch {
             try {
 
@@ -65,7 +68,7 @@ class WeatherViewModel @Inject constructor(
                 _weatherState.value = data
 
             } catch (e: Exception) {
-                println("error")
+                Toast.makeText(context, "Network error", Toast.LENGTH_SHORT).show()
                 e.printStackTrace()
             }
         }

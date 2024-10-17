@@ -39,9 +39,8 @@ fun HomeScreen(viewModel: WeatherViewModel = hiltViewModel()) {
 
         }
     ) {
-        AnimatedVisibility(visible = true) {
-            SheetScreen(weatherData, sheetHeight, sheetState)
-        }
+
+        SheetScreen(weatherData, sheetHeight, sheetState)
 
     }
 

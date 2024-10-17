@@ -1,30 +1,42 @@
 package com.example.zweather.app.presentation.screens.home.widgets.bottomsheet
 
 import android.annotation.SuppressLint
+import android.os.Build
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import com.example.zweather.app.data.Forecastday
+import java.time.LocalTime
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun HourForecastView() {
+fun HourForecastView(forecastday: Forecastday?) {
 
-    val hour = remember {
-        mutableStateOf(12)
+    val hourList = forecastday?.hour
+
+    val hour = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        LocalTime.now().hour
     }
-    val degree = "19°"
-    val state = "sunny"
+    else {
+        TODO("VERSION.SDK_INT < O")
+    }
 
-    val lazyListState = rememberLazyListState(initialFirstVisibleItemIndex = hour.value)
+    val lazyListState = rememberLazyListState(initialFirstVisibleItemIndex = hour)
 
     LazyRow(state = lazyListState) {
         items(count = 24) {
             val checkDay = if (it < 12) "AM" else "PM"
             val to12 = if (it < 12) it + 1 else it - 11
 
-            HourItem(it, hour.value, to12, checkDay, degree)
+            HourItem(
+
+                hourList?.get(it),
+                it,
+                hour,
+                to12,
+                checkDay,
+
+                )
         }
     }
 
