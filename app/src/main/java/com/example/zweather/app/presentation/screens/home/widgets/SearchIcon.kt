@@ -16,10 +16,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.zweather.R
+import com.example.zweather.app.presentation.Screen
 
 @Composable
-fun SearchIcon(modifier: Modifier) {
+fun SearchIcon(modifier: Modifier, navController: NavController) {
 
     val view = LocalView.current // Get the current view to access sound feedback
 
@@ -57,6 +59,7 @@ fun SearchIcon(modifier: Modifier) {
                 .clip(shape = CircleShape)
                 .clickable {
                     view.playSoundEffect(SoundEffectConstants.CLICK)
+                    navController.navigate(Screen.Search.route)
 
                 }
                 .size(80.dp)

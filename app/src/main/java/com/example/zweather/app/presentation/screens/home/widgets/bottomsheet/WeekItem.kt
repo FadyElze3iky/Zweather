@@ -14,23 +14,23 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.zweather.app.data.Forecastday
 
 @Composable
 fun WeekItem(
     it: Int,
-    dayForecast: Forecastday?,
+    dayForecast: com.example.zweather.app.domain.Forecastday?,
 ) {
-    val serverDate = dayForecast?.date?.split("-")
-    val date = "${serverDate?.get(1)}/${serverDate?.get(2)}"
-    val maxDegree = dayForecast?.day?.maxtempC
-    val minDegree = dayForecast?.day?.mintempC
+    val serverDate = remember { dayForecast?.date?.split("-") }
+    val date = remember { "${serverDate?.get(1)}/${serverDate?.get(2)}" }
+    val maxDegree = remember { dayForecast?.day?.maxtempC }
+    val minDegree = remember { dayForecast?.day?.mintempC }
 
 
     if (dayForecast != null) {

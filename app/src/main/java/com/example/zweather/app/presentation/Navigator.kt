@@ -1,6 +1,8 @@
 package com.example.zweather.app.presentation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -15,8 +17,10 @@ sealed class Screen(val route: String) {
 }
 
 @Composable
-fun Navigator() {
+fun Navigator(viewModel: WeatherViewModel = hiltViewModel()) {
+
     val navController = rememberNavController()
+    viewModel.initializeLocationClient(LocalContext.current)
 
     NavHost(
         navController = navController,
@@ -24,15 +28,18 @@ fun Navigator() {
     ) {
         composable(route = Screen.Splash.route) {
             SplashScreen(onSplashCompleted = {
-                navController.navigate(Screen.Home.route) {
-                    // Remove Splash from back stack
-                    popUpTo(Screen.Splash.route) { inclusive = true }
+                if (viewModel.weatherState != null) {
+                    navController.navigate(Screen.Home.route) {
+                        // Remove Splash from back stack
+                        popUpTo(Screen.Splash.route) { inclusive = true }
+                    }
                 }
+
             })
         }
 
         composable(route = Screen.Home.route) {
-            HomeScreen()
+            HomeScreen(navController = navController, viewModel = viewModel)
         }
         composable(route = Screen.Search.route) {
             SearchScreen()

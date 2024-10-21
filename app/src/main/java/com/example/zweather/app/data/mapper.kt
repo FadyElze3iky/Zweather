@@ -1,14 +1,23 @@
 package com.example.zweather.app.data
 
+import com.example.zweather.app.domain.AirQuality
+import com.example.zweather.app.domain.Astro
+import com.example.zweather.app.domain.Condition
+import com.example.zweather.app.domain.Condition2
+import com.example.zweather.app.domain.Condition3
+import com.example.zweather.app.domain.Current
+import com.example.zweather.app.domain.Day
 import com.example.zweather.app.domain.Forecast
+import com.example.zweather.app.domain.Forecastday
+import com.example.zweather.app.domain.Hour
 import com.example.zweather.app.domain.Location
 import com.example.zweather.app.domain.WeatherData
 
 fun WeatherResponse.toDomain(): WeatherData {
     return WeatherData(
-        location = this.location?.name?.let {
+        location = this.location?.let {
             Location(
-                name = it,
+                name = this.location.name,
                 region = this.location.region,
                 country = this.location.country,
                 lat = this.location.lat,
@@ -20,7 +29,7 @@ fun WeatherResponse.toDomain(): WeatherData {
         },
         current = this.current?.let {
             Current(
-                lastUpdatedEpoch = it.lastUpdatedEpoch,
+                lastUpdatedEpoch = this.current.lastUpdatedEpoch,
                 lastUpdated = this.current.lastUpdated,
                 tempC = this.current.tempC,
                 tempF = this.current.tempF,
@@ -65,7 +74,7 @@ fun WeatherResponse.toDomain(): WeatherData {
                 )
             )
         },
-        forecast = this.forecast?.let { forecast ->
+        forecast = this.forecast?.let {
             Forecast(
                 forecastday = forecast.forecastday.map { forecastday ->
                     Forecastday(

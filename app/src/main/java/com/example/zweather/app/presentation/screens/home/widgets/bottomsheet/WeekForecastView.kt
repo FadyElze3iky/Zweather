@@ -5,14 +5,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.zweather.app.data.Forecastday
 
 @Composable
-fun WeekForecastView(weaklyForecast: List<Forecastday>?) {
-
-    val degree = "19°"
-    val state = "sunny"
-
+fun WeekForecastView(weaklyForecast: List<com.example.zweather.app.domain.Forecastday>?) {
 
     Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
         WeekItem(0, weaklyForecast?.get(0))

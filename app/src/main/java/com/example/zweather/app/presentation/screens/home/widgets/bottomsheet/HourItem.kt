@@ -22,14 +22,13 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.zweather.app.data.Hour
 
 @Composable
 fun HourItem(
 
-    hourData: Hour?,
+    hourData: com.example.zweather.app.domain.Hour?,
     it: Int,
-    hour: Int,
+    hour: Int?,
     to12: Int,
     checkDay: String,
 
@@ -74,7 +73,6 @@ fun HourItem(
 
 
             if (hourData != null) {
-                println(hourData.condition?.icon)
                 val iconUrl = "https:${hourData.condition?.icon}"
                 AsyncImage(
                     model = iconUrl,

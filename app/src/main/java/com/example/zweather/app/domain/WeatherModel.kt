@@ -1,8 +1,5 @@
 package com.example.zweather.app.domain
 
-import com.example.zweather.app.data.Current
-import com.example.zweather.app.data.Forecastday
-
 data class WeatherData(
     val location: Location?,
     val current: Current?,

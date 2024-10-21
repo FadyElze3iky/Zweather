@@ -18,6 +18,11 @@ fun ColumnScope.CustomPager(pagerState: PagerState, weatherData: WeatherData?) {
 
     val hourlyForecast = weatherData?.forecast?.forecastday?.get(0)
     val weaklyForecast = weatherData?.forecast?.forecastday
+    val nowHour =
+
+        weatherData?.current?.lastUpdated?.split(" ")?.get(1)?.split(":")?.get(0)?.toInt()
+
+
     HorizontalPager(
         state = pagerState,
         userScrollEnabled = false
@@ -27,7 +32,7 @@ fun ColumnScope.CustomPager(pagerState: PagerState, weatherData: WeatherData?) {
             enter = fadeIn() + slideInVertically(),
             exit = fadeOut() + slideOutVertically()
         ) {
-            HourForecastView(hourlyForecast)
+            HourForecastView(hourlyForecast, nowHour)
         }
         AnimatedVisibility(
             visible = page == 1,

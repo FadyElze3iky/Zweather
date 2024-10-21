@@ -34,7 +34,7 @@ fun HomeBody(weatherData: WeatherData?, sheetState: BottomSheetScaffoldState) {
             painter = painterResource(id = R.drawable.daybackground),
             contentDescription = "background image",
             modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Fit
+            contentScale = ContentScale.FillWidth
         )
 
         if (weatherData != null) {
@@ -43,7 +43,7 @@ fun HomeBody(weatherData: WeatherData?, sheetState: BottomSheetScaffoldState) {
                     painter = painterResource(id = R.drawable.backimage),
                     contentDescription = "background image",
                     modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Fit
+                    contentScale = ContentScale.FillWidth
                 )
 
             }

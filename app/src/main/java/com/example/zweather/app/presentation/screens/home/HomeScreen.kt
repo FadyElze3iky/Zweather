@@ -11,8 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.zweather.app.presentation.WeatherViewModel
 import com.example.zweather.app.presentation.screens.home.widgets.BottomAppBar
 import com.example.zweather.app.presentation.screens.home.widgets.bottomsheet.SheetScreen
@@ -20,8 +20,8 @@ import com.example.zweather.app.presentation.screens.home.widgets.bottomsheet.Sh
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(viewModel: WeatherViewModel = hiltViewModel()) {
-    viewModel.initializeLocationClient(LocalContext.current)
+fun HomeScreen(viewModel: WeatherViewModel = hiltViewModel(), navController: NavController) {
+//    viewModel.initializeLocationClient(LocalContext.current)
     val weatherData = viewModel.weatherState.collectAsState().value
     val sheetState =
         rememberBottomSheetScaffoldState(bottomSheetState = rememberStandardBottomSheetState())
@@ -34,7 +34,7 @@ fun HomeScreen(viewModel: WeatherViewModel = hiltViewModel()) {
 
             AnimatedVisibility(
                 visible = (sheetState.bottomSheetState.currentValue.toString() == "PartiallyExpanded"),
-                content = { BottomAppBar() }
+                content = { BottomAppBar(navController = navController) }
             )
 
         }

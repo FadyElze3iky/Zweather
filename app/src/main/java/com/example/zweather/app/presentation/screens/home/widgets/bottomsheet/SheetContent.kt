@@ -44,7 +44,10 @@ fun SheetContent(weatherData: WeatherData?, sheetState: BottomSheetScaffoldState
 
 
         AnimatedVisibility(visible = sheetState.bottomSheetState.currentValue.toString() == "Expanded") {
-            ForecastData(modifier = Modifier.verticalScroll(rememberScrollState()))
+            ForecastData(
+                modifier = Modifier.verticalScroll(rememberScrollState()),
+                weatherData = weatherData
+            )
 
         }
     }
