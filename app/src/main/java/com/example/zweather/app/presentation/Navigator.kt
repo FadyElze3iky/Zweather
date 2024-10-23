@@ -29,7 +29,6 @@ fun Navigator(viewModel: WeatherViewModel = hiltViewModel()) {
     ) {
         composable(route = Screen.Splash.route) {
             SplashScreen(onSplashCompleted = {
-
                 navController.navigate(Screen.Home.route) {
                     // Remove Splash from back stack
                     popUpTo(Screen.Splash.route) { inclusive = true }

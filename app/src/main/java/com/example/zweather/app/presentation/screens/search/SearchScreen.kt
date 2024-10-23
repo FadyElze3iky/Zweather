@@ -55,9 +55,12 @@ fun SearchScreen(
                 ),
                 navigationIcon = {
                     IconButton(onClick = {
+                        if (viewModel.searchWeatherState.value?.location?.name != null) {
+                            viewModel._weatherState.value =
+                                viewModel.searchWeatherState.value
+                        }
                         navController.popBackStack()
-                        viewModel._weatherState.value =
-                            viewModel.searchWeatherState.value
+
                     }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,

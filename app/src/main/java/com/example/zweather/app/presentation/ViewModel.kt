@@ -85,7 +85,7 @@ class WeatherViewModel @Inject constructor(
             try {
                 _isLoading.value = true
 
-                val data = getWeatherUseCase(location, 1)
+                val data = getWeatherUseCase(location, 7)
                 _isLoading.value = false
 
                 _searchWeatherState.value = data
