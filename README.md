@@ -1,4 +1,4 @@
-# 🌦️ Weather App
+# 🌦️ ZWeather App
 
 This weather app, built using **Jetpack Compose**, delivers real-time weather updates and 5-day forecasts in a clean and dynamic user interface. The app leverages modern Android libraries and adheres to **Clean Architecture** principles, ensuring a smooth and maintainable codebase.
 
