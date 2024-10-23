@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,7 +24,7 @@ import com.example.zweather.R
 import com.example.zweather.app.domain.Current
 
 @Composable
-fun Visibility(modifier: Modifier, current: Current?) {
+fun Visibility(modifier: Modifier, current: Current?, fromSearch: Boolean = false) {
 
     val visibility = current?.visKm
     Box(modifier = modifier) {
@@ -45,35 +46,63 @@ fun Visibility(modifier: Modifier, current: Current?) {
                         contentDescription = "Visibility",
                         modifier = Modifier
                             .padding(end = 10.dp)
-                            .size(23.dp),
+                            .size(18.dp),
                         colorFilter = ColorFilter.tint(color = Color.Gray)
                     )
                     Text(
                         text = "VISIBILITY",
                         color = Color.Gray,
-                        style = MaterialTheme.typography.titleMedium,
+                        style = if (!fromSearch) MaterialTheme.typography.titleMedium else MaterialTheme.typography.bodySmall,
                         fontWeight = FontWeight.Bold
                     )
                 }
 
-                // Sunrise Time
-                Text(
-                    text = "$visibility KM",
-                    color = Color.White,
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier
-                        .align(Alignment.Start)
-                        .padding(top = 5.dp)
-                )
+                if (!fromSearch) {
+                    Text(
+                        text = "$visibility KM",
+                        color = Color.White,
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier
+                            .align(Alignment.Start)
+                            .padding(top = 5.dp)
+                    )
+                }
+                else {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = "$visibility",
+                            color = Color.White,
+                            style = MaterialTheme.typography.headlineSmall,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .padding(top = 5.dp)
+                        )
+                        Text(
+                            text = "KM",
+                            color = Color.White,
+                            style = MaterialTheme.typography.headlineSmall,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .padding(top = 5.dp)
+                        )
+                    }
+                }
+
             }
 
-
-            Text(
-                text = "The distance one can clearly see in the current weather conditions.",
-                color = Color.LightGray,
-                style = MaterialTheme.typography.bodySmall,
-            )
+            if (!fromSearch) {
+                Text(
+                    text = "The distance one can clearly see in the current weather conditions.",
+                    color = Color.LightGray,
+                    style = MaterialTheme.typography.bodySmall,
+                )
+            }
 
         }
     }

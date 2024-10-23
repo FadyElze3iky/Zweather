@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -25,11 +24,11 @@ import com.example.zweather.app.domain.WeatherData
 @Composable
 fun CurrentWeatherWidgetExpanded(weatherData: WeatherData?) {
 
-    val cityName = remember {
+    val cityName =
         weatherData?.location?.name ?: "waiting.."
-    }
-    val currentDegree = remember { weatherData?.current?.tempC?.toInt() ?: "" }
-    val condition = remember { weatherData?.current?.condition?.text ?: "" }
+
+    val currentDegree = weatherData?.current?.tempC?.toInt() ?: ""
+    val condition = weatherData?.current?.condition?.text ?: ""
 
 
     Column(

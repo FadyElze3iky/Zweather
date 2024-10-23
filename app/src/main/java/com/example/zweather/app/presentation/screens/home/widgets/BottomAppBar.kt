@@ -18,7 +18,7 @@ fun BottomAppBar(navController: NavController) {
     Box(modifier = Modifier.height(140.dp)) {
 
         Image(
-            painter = painterResource(id = R.drawable.rectangle),
+            painter = painterResource(id = R.drawable.bottomrec),
             contentDescription = "buttom bar",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier

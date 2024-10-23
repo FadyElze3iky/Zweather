@@ -74,6 +74,7 @@ fun WeatherResponse.toDomain(): WeatherData {
                 )
             )
         },
+
         forecast = this.forecast?.let {
             Forecast(
                 forecastday = forecast.forecastday.map { forecastday ->
@@ -169,8 +170,9 @@ fun WeatherResponse.toDomain(): WeatherData {
                     )
                 }
             )
-        }
-    )
+        },
+
+        )
 }
 
 

@@ -43,7 +43,6 @@ import kotlinx.coroutines.delay
 @Composable
 fun SplashScreen(
     onSplashCompleted: () -> Unit,
-//    viewModel: WeatherViewModel = hiltViewModel()
 ) {
 
     val context = LocalContext.current

@@ -8,10 +8,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.zweather.app.presentation.WeatherViewModel
 import com.example.zweather.app.presentation.screens.home.widgets.BottomAppBar
@@ -20,9 +18,7 @@ import com.example.zweather.app.presentation.screens.home.widgets.bottomsheet.Sh
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(viewModel: WeatherViewModel = hiltViewModel(), navController: NavController) {
-//    viewModel.initializeLocationClient(LocalContext.current)
-    val weatherData = viewModel.weatherState.collectAsState().value
+fun HomeScreen(viewModel: WeatherViewModel, navController: NavController) {
     val sheetState =
         rememberBottomSheetScaffoldState(bottomSheetState = rememberStandardBottomSheetState())
     val sheetHeight = LocalConfiguration.current.screenHeightDp * 0.45f
@@ -40,8 +36,10 @@ fun HomeScreen(viewModel: WeatherViewModel = hiltViewModel(), navController: Nav
         }
     ) {
 
-        SheetScreen(weatherData, sheetHeight, sheetState)
+        SheetScreen(viewModel, sheetHeight, sheetState)
 
     }
 
 }
+
+

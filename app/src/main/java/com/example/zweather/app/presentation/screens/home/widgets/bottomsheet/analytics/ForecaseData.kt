@@ -28,9 +28,11 @@ fun ForecastData(modifier: Modifier, weatherData: WeatherData?) {
     val smallBoxModifier = remember {
         Modifier
             .shadow(
-                elevation = 20.dp,
-                ambientColor = Color(0xff5d4ea5),
-                spotColor = Color(0xff57467c)
+                elevation = 5.dp,
+                ambientColor = Color(0xff000000),
+                spotColor = Color(0xff000000),
+                shape = RoundedCornerShape(20.dp),
+                clip = true
             )
             .border(
                 width = 1.dp,

@@ -9,19 +9,21 @@ import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.zweather.app.domain.WeatherData
+import com.example.zweather.app.presentation.WeatherViewModel
 import com.example.zweather.app.presentation.screens.home.widgets.HomeBody
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun SheetScreen(
-    weatherData: WeatherData?,
+    viewModel: WeatherViewModel,
     sheetHeight: Float,
     sheetState: BottomSheetScaffoldState,
 ) {
+    val weatherData = viewModel.weatherState.collectAsState().value
     BottomSheetScaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -46,7 +48,9 @@ fun SheetScreen(
     )
     {
 
-        HomeBody(weatherData = weatherData, sheetState = sheetState)
+        HomeBody(sheetState = sheetState, viewModel = viewModel)
 
     }
 }
+
+

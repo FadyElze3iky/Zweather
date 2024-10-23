@@ -2,6 +2,7 @@ package com.example.zweather.app.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -28,21 +29,29 @@ fun Navigator(viewModel: WeatherViewModel = hiltViewModel()) {
     ) {
         composable(route = Screen.Splash.route) {
             SplashScreen(onSplashCompleted = {
-                if (viewModel.weatherState != null) {
-                    navController.navigate(Screen.Home.route) {
-                        // Remove Splash from back stack
-                        popUpTo(Screen.Splash.route) { inclusive = true }
-                    }
+
+                navController.navigate(Screen.Home.route) {
+                    // Remove Splash from back stack
+                    popUpTo(Screen.Splash.route) { inclusive = true }
                 }
 
             })
         }
 
-        composable(route = Screen.Home.route) {
+        composable(
+            route = Screen.Home.route,
+        ) {
             HomeScreen(navController = navController, viewModel = viewModel)
         }
         composable(route = Screen.Search.route) {
-            SearchScreen()
+            SearchScreen(navController = navController, viewModel = viewModel)
         }
     }
+
+}
+
+@Preview
+@Composable
+fun NavigatorPreview() {
+    Navigator(viewModel = hiltViewModel())
 }

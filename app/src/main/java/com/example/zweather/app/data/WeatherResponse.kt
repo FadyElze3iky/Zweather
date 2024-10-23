@@ -7,7 +7,8 @@ data class WeatherResponse @JsonCreator constructor(
     @JsonProperty("location") val location: Location? = null,
     @JsonProperty("current") val current: Current? = null,
     @JsonProperty("forecast") val forecast: Forecast? = null,
-)
+
+    )
 
 data class Location @JsonCreator constructor(
     @JsonProperty("name") val name: String?,

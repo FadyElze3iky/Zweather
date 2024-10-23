@@ -60,7 +60,6 @@ fun AirQualityContainer(current: Current?) {
             modifier = Modifier
                 .shadow(
                     elevation = 20.dp,
-                    ambientColor = Color(0xff5d4ea5),
                     spotColor = Color(0xff57467c)
                 )
                 .border(

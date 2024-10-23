@@ -22,12 +22,17 @@ class WeatherViewModel @Inject constructor(
     private val getWeatherUseCase: GetWeatherUseCase,
 ) : ViewModel() {
 
-    private val _weatherState = MutableStateFlow<WeatherData?>(null)
+    var _weatherState = MutableStateFlow<WeatherData?>(null)
     val weatherState: StateFlow<WeatherData?> = _weatherState
 
     private val _searchWeatherState = MutableStateFlow<WeatherData?>(null)
-    val searchWeatherState: StateFlow<WeatherData?> = _weatherState
+    val searchWeatherState: StateFlow<WeatherData?> = _searchWeatherState
+
     private var fusedLocationClient: FusedLocationProviderClient? = null
+
+    // Add a loading state
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading
 
     // Initialize the FusedLocationProviderClient
     fun initializeLocationClient(context: Context) {
@@ -60,11 +65,11 @@ class WeatherViewModel @Inject constructor(
         }
     }
 
-    fun fetchWeather(location: String, context: Context) {
+    private fun fetchWeather(location: String, context: Context) {
         viewModelScope.launch {
             try {
-
                 val data = getWeatherUseCase(location, 7)
+
                 _weatherState.value = data
 
             } catch (e: Exception) {
@@ -74,12 +79,20 @@ class WeatherViewModel @Inject constructor(
         }
     }
 
-    fun searchWeather(location: String) {
+    fun searchWeather(location: String, context: Context) {
+
         viewModelScope.launch {
             try {
+                _isLoading.value = true
+
                 val data = getWeatherUseCase(location, 1)
+                _isLoading.value = false
+
                 _searchWeatherState.value = data
+
             } catch (e: Exception) {
+                Toast.makeText(context, "Network or server error", Toast.LENGTH_SHORT).show()
+
                 e.printStackTrace()
             }
         }

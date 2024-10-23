@@ -16,15 +16,18 @@ object WeatherModule {
 
     @Provides
     fun provideWeatherApiService(): WeatherApiService {
-        return Retrofit.Builder()
+        val retrofit = Retrofit.Builder()
             .baseUrl("https://api.weatherapi.com/v1/")
             .addConverterFactory(JacksonConverterFactory.create())
             .build()
             .create(WeatherApiService::class.java)
+
+        return retrofit
     }
 
     @Provides
     fun provideWeatherRepository(apiService: WeatherApiService): WeatherRepository {
         return WeatherRepositoryImpl(apiService)
     }
+
 }

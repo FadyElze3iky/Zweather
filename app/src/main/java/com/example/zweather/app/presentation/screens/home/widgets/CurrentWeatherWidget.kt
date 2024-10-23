@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -22,11 +21,11 @@ import com.example.zweather.app.domain.WeatherData
 @Composable
 fun CurrentWeatherWidget(weatherData: WeatherData?) {
 
-    val cityName = remember { weatherData?.location?.name ?: "waiting.." }
-    val currentDegree = remember { weatherData?.current?.tempC?.toInt() ?: "" }
-    val condition = remember { weatherData?.current?.condition?.text ?: "" }
-    val maxtc = remember { weatherData?.forecast?.forecastday?.get(0)?.day?.maxtempC ?: ".." }
-    val mintc = remember { weatherData?.forecast?.forecastday?.get(0)?.day?.mintempC ?: ".." }
+    val cityName = weatherData?.location?.name ?: "waiting.."
+    val currentDegree = weatherData?.current?.tempC?.toInt() ?: ""
+    val condition = weatherData?.current?.condition?.text ?: ""
+    val maxtc = weatherData?.forecast?.forecastday?.get(0)?.day?.maxtempC ?: ".."
+    val mintc = weatherData?.forecast?.forecastday?.get(0)?.day?.mintempC ?: ".."
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,

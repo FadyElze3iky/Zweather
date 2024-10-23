@@ -45,10 +45,10 @@ fun HourItem(
                 shape = RoundedCornerShape(50.dp)
             )
             .shadow(
-                elevation = 30.dp,
+                elevation = 10.dp,
                 shape = RoundedCornerShape(50.dp),
                 ambientColor = Color(0xff000000),
-                spotColor = Color(0xffa17e7e),
+                spotColor = Color(0xff000000),
             )
             .clip(shape = RoundedCornerShape(50.dp))
 

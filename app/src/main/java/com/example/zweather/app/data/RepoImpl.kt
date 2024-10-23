@@ -11,6 +11,7 @@ class WeatherRepositoryImpl @Inject constructor(
 
     override suspend fun getWeather(location: String, days: Int): WeatherData {
         val response = apiService.getWeather(apiKey, location, days)
+
         return response.toDomain()
     }
 }

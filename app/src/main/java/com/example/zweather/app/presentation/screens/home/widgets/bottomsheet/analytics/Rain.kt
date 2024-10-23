@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,7 +24,7 @@ import com.example.zweather.R
 import com.example.zweather.app.domain.Forecastday
 
 @Composable
-fun Rain(modifier: Modifier, forecastday: Forecastday?) {
+fun Rain(modifier: Modifier, forecastday: Forecastday?, fromSearch: Boolean = false) {
 
     val rainfallChance = forecastday?.day?.dailyChanceOfRain
     val snowfallChance = forecastday?.day?.dailyChanceOfSnow
@@ -35,7 +36,7 @@ fun Rain(modifier: Modifier, forecastday: Forecastday?) {
                 .align(Alignment.Center)
                 .padding(horizontal = 10.dp),
             horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.SpaceBetween
+            verticalArrangement = if (!fromSearch) Arrangement.SpaceBetween else Arrangement.Top
         ) {
             // Sunrise icon and text
             Row(
@@ -46,31 +47,52 @@ fun Rain(modifier: Modifier, forecastday: Forecastday?) {
                     contentDescription = "Sunrise",
                     modifier = Modifier
                         .padding(end = 10.dp)
-                        .size(20.dp),
+                        .size(18.dp),
                     colorFilter = ColorFilter.tint(color = Color.Gray)
                 )
                 Text(
                     text = "RAINFALL",
                     color = Color.Gray,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = if (!fromSearch) MaterialTheme.typography.titleMedium else MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Bold
                 )
             }
 
-            // Sunrise Time
-            Text(
-                text = "$rainfallChance %",
-                color = Color.White,
-                style = MaterialTheme.typography.headlineLarge,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
+            if (!fromSearch) {
+                Text(
+                    text = "$rainfallChance %",
+                    color = Color.White,
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+            }
+            else {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = "$rainfallChance %",
+                        color = Color.White,
+                        style = MaterialTheme.typography.headlineLarge,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                }
+            }
 
-            Text(
-                text = "Snow chance: $snowfallChance %",
-                color = Color.LightGray,
-                style = MaterialTheme.typography.titleSmall,
-            )
+
+
+
+            if (!fromSearch) {
+                Text(
+                    text = "Snow chance: $snowfallChance %",
+                    color = Color.LightGray,
+                    style = MaterialTheme.typography.titleSmall,
+                )
+
+            }
 
         }
     }
