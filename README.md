@@ -2,6 +2,11 @@
 
 This weather app, built using **Jetpack Compose**, delivers real-time weather updates and 5-day forecasts in a clean and dynamic user interface. The app leverages modern Android libraries and adheres to **Clean Architecture** principles, ensuring a smooth and maintainable codebase.
 
+
+
+https://github.com/user-attachments/assets/32334b78-2e34-4f69-aedb-dc043af4dced
+
+
 ## ✨ Features
 
 - **Real-time weather updates**: Fetches up-to-date weather data from an external API in JSON format.
